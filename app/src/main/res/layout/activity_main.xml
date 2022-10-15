@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!--chỉ có thể đặt 1 View con duy nhất trong ScrollView-->
+    <!--    Nên đặt 1 ViewGroup bên trong để ta có thể hiển thị nhiều View trong Scroll View-->
+    <!--    Đây cũng là cách khắc phục tình huống user quay screen mà content bị cắt mất-->
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        tools:context=".MainActivity">
+
+        <ImageView
+            android:id="@+id/icon_cost_of_service"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:importantForAccessibility="no"
+            app:layout_constraintBottom_toBottomOf="@+id/cost_of_service"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/cost_of_service"
+            app:srcCompat="@drawable/ic_store" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/cost_of_service"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:hint="@string/cost_of_service"
+            app:layout_constraintStart_toEndOf="@+id/icon_cost_of_service"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="PrivateResource,RtlSymmetry">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/cost_of_service_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:importantForAccessibility="no"
+            app:layout_constraintBottom_toBottomOf="@+id/service_question"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/service_question"
+            app:srcCompat="@drawable/ic_service" />
+
+        <TextView
+            android:id="@+id/service_question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/how_was_the_service"
+            app:layout_constraintStart_toStartOf="@id/cost_of_service"
+            app:layout_constraintTop_toBottomOf="@+id/cost_of_service"
+            tools:ignore="RtlSymmetry"
+            tools:layout_editor_absoluteX="36dp" />
+        <!--    Có một thuộc tính về RadioGroupnơi bạn có thể chỉ định nút nào nên được kiểm tra ban đầu. Nó được gọi checkedButtonvà bạn đặt nó thành ID tài nguyên của nút radio bạn muốn chọn.-->
+
+        <RadioGroup
+            android:id="@+id/tip_options"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checkedButton="@id/option_twenty_percent"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="@+id/service_question"
+            app:layout_constraintTop_toBottomOf="@+id/service_question">
+            <!-- Radio Group kế thừa từ Linear layout, do đó các RadioButton in RadioGroup không cần constrain-->
+            <RadioButton
+                android:id="@+id/option_twenty_percent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/amazing_20" />
+
+            <RadioButton
+                android:id="@+id/option_eighteen_percent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/good_18" />
+
+            <RadioButton
+                android:id="@+id/option_fifteen_percent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/okay_15" />
+        </RadioGroup>
+
+        <ImageView
+            android:id="@+id/icon_round_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:importantForAccessibility="no"
+            app:layout_constraintBottom_toBottomOf="@+id/round_up_switch"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/round_up_switch"
+            app:srcCompat="@drawable/ic_round_up" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/round_up_switch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/round_up_tip"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tip_options"
+            app:layout_constraintTop_toBottomOf="@+id/tip_options"
+            tools:ignore="RtlSymmetry,UseSwitchCompatOrMaterialXml" />
+
+        <Button
+            android:id="@+id/calculate_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@string/calculate"
+            android:text="@string/calculate"
+            android:textColor="#424242"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/round_up_switch"
+            app:layout_constraintTop_toBottomOf="@+id/round_up_switch" />
+
+        <TextView
+            android:id="@+id/tip_result"
+            style="@style/Widget.TipTime.TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/calculate_button"
+            tools:text="Tip Amount: $10" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
+
+
+    <!--xmlns là không gian tên xml-->
+    <!--android: là namspace android-->
+    <!--Padding tương tự như margin, nhưng nó thêm không gian vào bên trong ConstraintLayoutthay vì thêm không gian ra bên ngoài.-->
+    <!--
+    inputType: thuộc tính chỉ định kiểu dữ liệu đầu vào, kiểu bàn phím để nhập và kiểu hiển thị sau khi nhập
+    hint: thuộc tính mô tả dữ liệu sẽ nhập
+    id: tên của 1 View , dùng để tham chiếu đến View đó
+    Radio Buttons:Các nút radio cho phép người dùng chọn một tùy chọn từ một tập
+    hợp. Bạn nên sử dụng các nút radio cho các nhóm tùy chọn loại trừ lẫn nhau nếu
+    bạn cho rằng người dùng cần xem tất cả các tùy chọn có sẵn song song với nhau.
+     Nếu không cần thiết phải hiển thị tất cả các tùy chọn cạnh nhau, hãy sử dụng
+      một spinner
+     *Để tạo từng tùy chọn nút radio, hãy tạo một RadioButtontrong bố cục của bạn. Tuy nhiên, vì các nút radio loại trừ lẫn nhau, bạn phải nhóm chúng lại với nhau bên trong a RadioGroup. Bằng cách nhóm chúng lại với nhau, hệ thống đảm bảo rằng mỗi lần chỉ có thể chọn một nút radio.
+     orientation: định hướng, thuộc tính chung cho các View (các ViewGroup hay sử dụng)
+    -->
+    <!--Switch: Switch là một widget chuyển đổi hai trạng thái. Người dùng có thể kéo công tắc "ngón tay cái"(thumb) qua lại để chọn một trong hai tùy chọn hoặc chỉ cần chạm vào công tắc để chuyển đổi giữa các tùy chọn.
+    Thuộc tính text tính kiểm soát văn bản của switch label
+    Thuộc tính textOn và textOf kiểm soát văn bản của thumb label
+    The textAppearance property and the related setTypeface() methods control the typeface and style of the switch label
+    The switchTextAppearance property and the related setSwitchTypeface() methods control the typeface and style of the thumb text.
+    The thumb text is displayed only if the showText attribute is set to true
+     0dp : trong constrain layout có nghĩa là ràng buộc đối sánh
+     Đặt chiều rộng để thông báo 0dp cho hệ thống không tính chiều rộng,
+      chỉ cần cố gắng khớp với các ràng buộc có trên khung nhìn.
+    Có thể vì version mới nhất của Android không cho math_parent trong constrain layout , nên phải sử dụng 0dp cho width or height để bỏ qua thiết lập rộng hoặc dài,điều đó có nghĩa chiều đó sẽ khớp với các ràng buộc, vậy sau đó chúng ta chỉ cần thiết lập các ràng buộc hợp lý là ổn
+    -->
+    <!--
+    Để tạo một trường văn bản(text field) như được hiển thị ở trên (có đường viền và có label), hãy sử dụng a TextInputLayoutcó kèm theo TextInputEditTexttừ thư viện MDC. tedt field Material có thể được tùy chỉnh dễ dàng thành:
+    Hiển thị văn bản đầu vào hoặc nhãn(label) luôn hiển thị
+    Hiển thị một biểu tượng(icon) trong trường văn bản
+    Hiển thị trình trợ giúp(helper) hoặc thông báo lỗi(error)
+
+    -->
+    <!--<com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/cost_of_service_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:inputType="numberDecimal" />-->
+    <!--Lưu ý: Nếu bạn chỉ định một thuộc tính trong một kiểu
+    (ví dụ: đặt android:textSizelà 18sp) và cũng chỉ định cùng một thuộc tính đó trong
+     tệp bố cục (ví dụ: đặt android:textSizelà 14sp), thì giá trị bạn đặt trong bố cục
+      ( 14sp) sẽ thực sự được áp dụng cho những gì bạn thấy trên màn hình.-->
+    <!--Không bao giờ thêm một RecyclerView hoặc ListView
+    vào một dạng xem cuộn.
+    Làm như vậy dẫn đến hiệu suất giao diện người dùng kém
+    và trải nghiệm người dùng kém.-->
